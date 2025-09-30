@@ -1,0 +1,19 @@
+dry-run: null
+hookfiles: null
+language: nodejs
+server: "${BASE_URL:-http://localhost:3000/api.fin/v1}"
+init: false
+custom:
+  apiaryApiKey: null
+names: false
+only: []
+reporter: [cli]
+output: []
+header: []
+sorted: false
+user: null
+inline-errors: false
+details: true
+path: [docs/api/openapi.yaml]
+blueprint: null
+endpoint: "${BASE_URL:-http://localhost:3000/api.fin/v1}"

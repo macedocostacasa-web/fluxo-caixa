@@ -1,0 +1,9 @@
+{
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json",
+  "version": "Notebook/1.0",
+  "items": [
+    {"type": 1, "content": {"json": "# Finance Overview"}},
+    {"type": 9, "content": {"version": "KqlItem/1.0", "query": "AzureDiagnostics | where Category == 'ServiceBusLogs' | summarize dlq=sum(todouble(DeadLetteredMessages)) by bin(TimeGenerated, 5m)", "size": 1}},
+    {"type": 9, "content": {"version": "KqlItem/1.0", "query": "AzureMetrics | where ResourceProvider == 'MICROSOFT.DOCUMENTDB' and MetricName=='TotalRequests' | summarize reqs=sum(Total) by bin(TimeGenerated, 5m)", "size": 1}}
+  ]
+}

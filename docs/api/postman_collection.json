@@ -1,0 +1,132 @@
+{
+  "info": {
+    "name": "Fluxo de Caixa API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "b0bf9c40-4a2f-4fbb-9f00-000000000000"
+  },
+  "item": [
+    {
+      "name": "Criar lançamento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{idemKey}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/lancamentos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "lancamentos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"merchantId\": \"{{merchantId}}\", \"amount\": 150.75, \"kind\": \"CREDIT\", \"createdAt\": \"2025-09-30T10:05:00Z\"}"
+        }
+      }
+    },
+    {
+      "name": "Listar lançamentos do dia",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/lancamentos?merchantId={{merchantId}}&data={{data}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "lancamentos"
+          ],
+          "query": [
+            {
+              "key": "merchantId",
+              "value": "{{merchantId}}"
+            },
+            {
+              "key": "data",
+              "value": "{{data}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Consultar consolidado",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/consolidado?merchantId={{merchantId}}&data={{data}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "consolidado"
+          ],
+          "query": [
+            {
+              "key": "merchantId",
+              "value": "{{merchantId}}"
+            },
+            {
+              "key": "data",
+              "value": "{{data}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Reprocessar dia (admin)",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{baseUrl}}/admin/replay?merchantId={{merchantId}}&data={{data}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "replay"
+          ],
+          "query": [
+            {
+              "key": "merchantId",
+              "value": "{{merchantId}}"
+            },
+            {
+              "key": "data",
+              "value": "{{data}}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api.fin/v1"
+    },
+    {
+      "key": "merchantId",
+      "value": "b7b3c39e-1234-4f7c-8a55-1d2f3a4b5c6d"
+    },
+    {
+      "key": "data",
+      "value": "2025-09-30"
+    },
+    {
+      "key": "idemKey",
+      "value": "demo-{{timestamp}}"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+archimate:
+  motivation:
+    stakeholders: [Comerciante, GestorLoja, EquipeTI, Segurança, FinOps]
+    drivers: [Confiabilidade, BaixaLatencia, CustosControlados, LGPD]
+    goals: [SaldoDiarioConfiavel, AltaDisponibilidade, CustoElastico]
+    outcomes: [ReducaoRetrabalho, DecisoesRapidasDeCaixa]
+    requirements:
+      - RegistrarLancamentoIdempotente
+      - ConsolidarPorDiaELoja
+      - Pico50rpsComPerdaAte5pct
+      - LagMedioAte10s
+    constraints: [PrazoMVP, BudgetFixo, PadroesAzure]
+    principles: [EventFirst, ZeroTrust, ObservabilidadeGuiadaPorSLO]
+  business:
+    roles: [OperadorCaixa, GestorLoja, SuporteTI]
+    processes: [RegistrarLancamento, ConsolidarDia, ConsultarSaldoDiario]
+    services: [ServicoLancamentos, ServicoConsolidadoDiario]
+    contracts: [PoliticaEstorno, SLAConsultaSaldo]
+  application:
+    components: [WebSPA, APILancamentos, Consolidador, AuthService, Observability]
+    services: [RegistroLancamentos, ConsultaConsolidado]
+    data_objects: [Lancamento, SaldoDiario]
+    collaborations: [API_Consolidador]
+  technology:
+    nodes: [FrontDoor, WAF, APIM, AppService, Functions, ServiceBus, CosmosDB, Redis, BlobStorage, KeyVault, Monitor]
+    technology_services: [EntregaConteudo, GatewayAPI, Mensageria, BancoNoSQL, Cache, Armazenamento, Segredos, Observabilidade]
+    artifacts: [ContainerAPI, PackageFunctions, IaC_Bicep, Workbook_JSON]
+    deployments:
+      - { artifact: ContainerAPI, node: AppService }
+      - { artifact: PackageFunctions, node: Functions }
+  implementation:
+    capabilities: [Observability, Security, PaymentsLike]
+    work_packages: [MVP, Hardening, Piloto, GA]
+    deliverables: [DocArquitetura, ADRs, APIsOpenAPI, Dashboards, Runbooks]
+    plateaus: [AsIs, ToBe_MVP, ToBe_GA]
+    gaps: [PE_VNET_Todos, DR_Georredundante]

@@ -1,0 +1,20 @@
+<mxfile host="app.diagrams.net" modified="2025-09-30T10:15:06.283830" agent="Python" version="24.7.10">
+  <diagram id="diag1" name="Application Usage">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="br1" value="Business Role\nGestor Loja" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="40" y="40" w="160" h="60" />
+<mxCell id="br2" value="Business Role\nOperador Caixa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="40" y="140" w="160" h="60" />
+<mxCell id="svcB" value="Application Service\nConsulta Consolidado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#93C5FD;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="260" y="40" w="220" h="60" />
+<mxCell id="svcA" value="Application Service\nRegistro Lançamentos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#93C5FD;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="260" y="140" w="220" h="60" />
+<mxCell id="d1" value="Data Object\nSaldoDiario" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#93C5FD;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="520" y="40" w="180" h="60" />
+<mxCell id="d2" value="Data Object\nLancamento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#93C5FD;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="520" y="140" w="180" h="60" />
+<mxCell id="u1" value="Usage" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="br1" target="svcB" />
+<mxCell id="u2" value="Usage" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="br2" target="svcA" />
+<mxCell id="a1" value="Access" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="svcB" target="d1" />
+<mxCell id="a2" value="Access" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="svcA" target="d2" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,27 @@
+name: deploy-apps
+on:
+  workflow_dispatch:
+    inputs:
+      api_appname:
+        description: 'Web App (API) name'
+        required: true
+        default: 'fin-api-dev'
+      func_appname:
+        description: 'Function App name'
+        required: true
+        default: 'fin-func-dev'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy Functions (Consolidador)
+        uses: azure/functions-action@v1
+        with:
+          app-name: ${{ github.event.inputs.func_appname }}
+          package: src/svc-cons
+      - name: Deploy API (App Service)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ github.event.inputs.api_appname }}
+          package: src/api

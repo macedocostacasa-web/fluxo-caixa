@@ -1,0 +1,26 @@
+<mxfile host="app.diagrams.net" modified="2025-09-30T10:15:06.255695" agent="Python" version="24.7.10">
+  <diagram id="diag1" name="Motivation Overview">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="st1" value="Stakeholder\nComerciante" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="40" y="40" w="140" h="50" />
+<mxCell id="st2" value="Stakeholder\nGestor Loja" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="40" y="100" w="140" h="50" />
+<mxCell id="drv1" value="Driver\nConfiabilidade" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="220" y="40" w="140" h="50" />
+<mxCell id="drv2" value="Driver\nBaixa Latência" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="220" y="100" w="140" h="50" />
+<mxCell id="goal1" value="Goal\nSaldo Diário Confiável" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="420" y="40" w="180" h="50" />
+<mxCell id="goal2" value="Goal\nAlta Disponibilidade" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="420" y="100" w="180" h="50" />
+<mxCell id="out1" value="Outcome\nDecisões rápidas de caixa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="640" y="40" w="200" h="50" />
+<mxCell id="req1" value="Requirement\nRegistrar Lançamento Idempotente" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="420" y="200" w="220" h="50" />
+<mxCell id="req2" value="Requirement\nConsolidar por Dia/Loja" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="420" y="260" w="220" h="50" />
+<mxCell id="nfr1" value="Constraint\nPico 50 rps, perda ≤ 5%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCA5A5;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="420" y="320" w="220" h="50" />
+<mxCell id="e1" source="drv1" target="goal1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="e2" source="drv2" target="goal2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="e3" source="goal1" target="out1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="e4" source="req1" target="goal1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="e5" source="req2" target="goal1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="e6" source="nfr1" target="goal2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

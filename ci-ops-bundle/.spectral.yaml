@@ -1,0 +1,15 @@
+extends: "spectral:oas"
+rules:
+  operation-summary:
+    description: "Evite summaries vazios ou genéricos"
+    given: "$.paths[*][*]"
+    then:
+      field: "summary"
+      function: truthy
+  no-ambiguous-paths: true
+  openapi-tags:
+    description: "Todas as operações devem ter tags"
+    given: "$.paths[*][*]"
+    then:
+      field: "tags"
+      function: truthy

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Fluxo de Caixa — Arquitetura & Implementação (Azure)
 
 > Controle de lançamentos (débitos/créditos) e saldo diário consolidado, com **alta disponibilidade**, **event-driven** e **observabilidade** completa.  
@@ -127,3 +128,8 @@ MIT
 - **Publicar no APIM**: `make apim:publish`.  
 - **NFR**: `make test:load` local ou **Actions → load-testing-k6**.  
 - **Operação**: ver `RUNBOOK.md` e o *drill* `RUNBOOK-DLQ-DRILL.md`.
+=======
+# Repositório — Solução Fluxo de Caixa
+
+Veja `docs/` para arquitetura (ArchiMate & ADRs) e `infra/` para Bicep/Terraform e workflows.
+>>>>>>> 1b78649 (chore: bootstrap do projeto)

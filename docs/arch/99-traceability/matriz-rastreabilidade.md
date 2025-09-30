@@ -1,0 +1,9 @@
+# Matriz de Rastreabilidade (Requirement → Service → Component → Node → Outcome)
+
+| Requirement | App Service | App Component | Node/Infra | Outcome |
+|---|---|---|---|---|
+| RegistrarLancamentoIdempotente | RegistroLancamentos | APILancamentos | AppService + ServiceBus | Menos duplicatas |
+| ConsolidarPorDiaELoja | ConsultaConsolidado | Consolidador | Functions + Cosmos | Saldo confiável |
+| Pico50rpsComPerdaAte5pct | ConsultaConsolidado | Consolidador + Redis | SB + Functions + Redis | Baixa latência |
+| LagMedioAte10s | ConsultaConsolidado | Consolidador | SB + Functions | Atualização oportuna |
+| ZeroTrust_LGPD | Todos | Auth/Gateway | FrontDoor+WAF+APIM+PEs | Superfície reduzida |

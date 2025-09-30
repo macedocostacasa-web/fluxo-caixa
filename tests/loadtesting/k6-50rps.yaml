@@ -1,0 +1,17 @@
+version: v0.1
+testId: consolidado-50rps
+displayName: k6 — 50 rps consolidado
+testPlan: ../k6/50rps_consolidado.js
+description: |
+  Executa 50 req/s por 5 minutos contra /consolidado para validar NFR (perda ≤ 5%).
+engineInstances: 1
+failureCriteria:
+  - "percentage(http_req_failed) > 5"
+  - "p(95) > 300"
+env:
+  - name: BASE_URL
+    value: "http://localhost:3000/api.fin/v1"
+  - name: MERCHANT_ID
+    value: "b7b3c39e-1234-4f7c-8a55-1d2f3a4b5c6d"
+  - name: DATE
+    value: "2025-09-30"
