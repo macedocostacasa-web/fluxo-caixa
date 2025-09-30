@@ -9,12 +9,12 @@
 - **NFRs (SLOs)**: 50 rps no consolidado com **perda ≤ 5%** (janelas de 5 min), p95 leitura ≤ 300 ms (com cache), lag médio do tópico ≤ 10 s.
 
 ## 🧭 Arquitetura (diagramas)
-- `docs/archimate/01-motivation/motivation-overview.drawio`
-- `docs/archimate/02-business/business-services-process.drawio`
-- `docs/archimate/03-application/application-cooperation.drawio`
-- `docs/archimate/04-technology/technology-final-implementation.drawio`
-- `docs/archimate/04-technology/technology-scaled-observability-resilience.drawio`
-- `docs/archimate/05-implementation/implementation-migration.drawio`
+- `docs/arch/01-motivation/motivation-overview.drawio`
+- `docs/arch/02-business/business-services-process.drawio`
+- `docs/arch/03-application/application-cooperation.drawio`
+- `docs/arch/04-technology/technology-final-implementation.drawio`
+- `docs/arch/04-technology/technology-scaled-observability-resilience.drawio`
+- `docs/arch/05-implementation/implementation-migration.drawio`
 
 > Legenda/cores em `docs/archimate/00-catalogo/legenda-e-convencoes.md`.  
 > Decisões registradas em `docs/adrs/` (0001–0012 + TEMPLATE).
@@ -118,7 +118,7 @@ make apim:publish
 - Revisores automáticos por pasta em `.github/CODEOWNERS`.
 
 ## 📜 Licença
-Defina aqui a licença desejada (ex.: MIT).
+MIT
 
 ---
 
