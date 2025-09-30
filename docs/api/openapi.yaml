@@ -1,0 +1,208 @@
+openapi: 3.0.3
+info:
+  title: Fluxo de Caixa — Lançamentos & Consolidado
+  version: "1.0.0"
+  description: |
+    API para controle de lançamentos (débitos/créditos) e consulta de saldo diário consolidado.
+    Segurança via OAuth2/OIDC (Azure Entra ID). Idempotência por **Idempotency-Key**.
+servers:
+  - url: https://api.example.com/api.fin/v1
+    description: Produção
+  - url: http://localhost:3000/api.fin/v1
+    description: Local
+tags:
+  - name: Lancamentos
+  - name: Consolidado
+  - name: Relatorios
+  - name: Admin
+paths:
+  /lancamentos:
+    post:
+      summary: Registrar lançamento (idempotente)
+      operationId: criarLancamento
+      tags: [Lancamentos]
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {"type":"string"}
+          description: Chave idempotente única por tentativa de criação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NovoLancamento'
+            examples:
+              credito:
+                value: { merchantId: "b7b3c39e-1234-4f7c-8a55-1d2f3a4b5c6d", amount: 150.75, kind: "CREDIT", createdAt: "2025-09-30T10:05:00Z" }
+      responses:
+        "201":
+          description: Criado
+          headers:
+            Idempotency-Key: { description: Repasso da chave, schema: {type: string} }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Lancamento' }
+        "409":
+          description: Duplicado pela chave idempotente
+        "400":
+          description: Erro de validação
+      security: [{ oauth2: ["api.readwrite"] }]
+    get:
+      summary: Listar lançamentos por merchantId e data
+      operationId: listarLancamentos
+      tags: [Lancamentos]
+      parameters:
+        - in: query
+          name: merchantId
+          required: true
+          schema: {type: string, format: uuid}
+        - in: query
+          name: data
+          required: true
+          schema: {type: string, pattern: '^\\d{4}-\\d{2}-\\d{2}$'}
+        - in: query
+          name: limit
+          schema: {type: integer, minimum: 1, maximum: 500, default: 100}
+        - in: query
+          name: continuationToken
+          schema: {type: string}
+      responses:
+        "200":
+          description: Lista ordenada por createdAt
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: '#/components/schemas/Lancamento' }
+                  continuationToken: { type: string, nullable: true }
+      security: [{ oauth2: ["api.read"] }]
+  /lancamentos/{id}/estorno:
+    post:
+      summary: Estornar lançamento
+      operationId: estornarLancamento
+      tags: [Lancamentos]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                motivo: { type: string }
+      responses:
+        "201":
+          description: Estorno criado (novo lançamento compensatório)
+          content: { application/json: { schema: { $ref: '#/components/schemas/Lancamento' } } }
+      security: [{ oauth2: ["api.readwrite"] }]
+  /consolidado:
+    get:
+      summary: Consultar saldo diário consolidado
+      operationId: consultarConsolidado
+      tags: [Consolidado]
+      parameters:
+        - in: query
+          name: merchantId
+          required: true
+          schema: {type: string, format: uuid}
+        - in: query
+          name: data
+          required: true
+          schema: {type: string, pattern: '^\\d{4}-\\d{2}-\\d{2}$'}
+      responses:
+        "200":
+          description: Snapshot do saldo diário
+          headers:
+            X-Last-Recalc-At: { description: Timestamp do último recálculo, schema: {type: string, format: date-time} }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SaldoDiario' }
+      security: [{ oauth2: ["api.read"] }]
+  /relatorios/diario:
+    post:
+      summary: Exportar relatório diário (assíncrono)
+      operationId: exportarRelatorioDiario
+      tags: [Relatorios]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantId: { type: string, format: uuid }
+                inicio: { type: string, format: date }
+                fim: { type: string, format: date }
+      responses:
+        "202":
+          description: Export agendado; acompanhe por URL temporária
+          headers:
+            Location: { description: URL de download, schema: {type: string, format: uri} }
+      security: [{ oauth2: ["api.read"] }]
+  /admin/replay:
+    post:
+      summary: Reprocessar consolidação de uma data
+      operationId: reprocessarDia
+      tags: [Admin]
+      parameters:
+        - in: query
+          name: merchantId
+          required: true
+          schema: {type: string, format: uuid}
+        - in: query
+          name: data
+          required: true
+          schema: {type: string, pattern: '^\\d{4}-\\d{2}-\\d{2}$'}
+      responses:
+        "202":
+          description: Reprocesso agendado
+      security: [{ oauth2: ["api.admin"] }]
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            api.read: Leitura
+            api.readwrite: Leitura/Escrita
+            api.admin: Operações administrativas
+  schemas:
+    NovoLancamento:
+      type: object
+      required: [merchantId, amount, kind, createdAt]
+      properties:
+        merchantId: { type: string, format: uuid }
+        amount: { type: number, format: double, minimum: 0.01 }
+        kind: { type: string, enum: [DEBIT, CREDIT] }
+        createdAt: { type: string, format: date-time }
+        metadata: { type: object, additionalProperties: true }
+    Lancamento:
+      allOf:
+        - $ref: '#/components/schemas/NovoLancamento'
+        - type: object
+          properties:
+            id: { type: string }
+            correlationId: { type: string }
+            reversedBy: { type: string, nullable: true }
+    SaldoDiario:
+      type: object
+      required: [merchantId, data, saldoFinal, totalCreditos, totalDebitos]
+      properties:
+        merchantId: { type: string, format: uuid }
+        data: { type: string, pattern: '^\\d{4}-\\d{2}-\\d{2}$' }
+        saldoInicial: { type: number, format: double }
+        totalCreditos: { type: number, format: double }
+        totalDebitos: { type: number, format: double }
+        saldoFinal: { type: number, format: double }
+        lastRecalcAt: { type: string, format: date-time }

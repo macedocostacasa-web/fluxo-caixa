@@ -1,0 +1,15 @@
+{
+  "name": "fluxo-caixa-tooling",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "spec:lint": "spectral lint docs/api/openapi.yaml",
+    "spec:mock": "prism mock -h 0.0.0.0 -p 4010 docs/api/openapi.yaml",
+    "test:contract": "dredd --config dredd.yml"
+  },
+  "devDependencies": {
+    "@stoplight/spectral-cli": "^6.11.0",
+    "@stoplight/prism-cli": "^5.6.1",
+    "dredd": "^14.0.0"
+  }
+}

@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" modified="2025-09-30T10:15:06.284551" agent="Python" version="24.7.10">
+  <diagram id="diag1" name="Technology & Deployment">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="fd" value="Node\nFront Door" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="40" y="40" w="140" h="50" />
+<mxCell id="waf" value="Node\nWAF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="200" y="40" w="120" h="50" />
+<mxCell id="apim" value="Node\nAPIM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="340" y="40" w="130" h="50" />
+<mxCell id="app" value="Node\nApp Service (API)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="500" y="40" w="170" h="50" />
+<mxCell id="func" value="Node\nFunctions (Consolidador)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="500" y="110" w="170" h="50" />
+<mxCell id="sb" value="Node\nService Bus (Topic)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="340" y="120" w="130" h="50" />
+<mxCell id="cos" value="Node\nCosmos DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="700" y="40" w="140" h="50" />
+<mxCell id="red" value="Node\nRedis Cache" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="700" y="110" w="140" h="50" />
+<mxCell id="kv" value="Node\nKey Vault" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="860" y="40" w="120" h="50" />
+<mxCell id="mon" value="Node\nAzure Monitor/Logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="860" y="110" w="170" h="50" />
+<mxCell id="t1" source="fd" target="waf" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t2" source="waf" target="apim" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t3" source="apim" target="app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t4" source="app" target="sb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t5" source="sb" target="func" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t6" source="func" target="cos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t7" source="func" target="red" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t8" source="app" target="kv" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t9" source="func" target="kv" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t10" source="app" target="mon" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="t11" source="func" target="mon" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

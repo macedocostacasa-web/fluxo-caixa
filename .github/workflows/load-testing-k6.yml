@@ -1,0 +1,54 @@
+name: load-testing-k6
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Base URL da API (ex.: https://api.example.com/api.fin/v1)'
+        required: true
+        default: 'http://localhost:3000/api.fin/v1'
+      merchant_id:
+        description: 'merchantId para o teste'
+        required: true
+        default: 'b7b3c39e-1234-4f7c-8a55-1d2f3a4b5c6d'
+      date:
+        description: 'Data do consolidado (YYYY-MM-DD)'
+        required: true
+        default: '2025-09-30'
+
+jobs:
+  run-load-test:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Executar Azure Load Testing (k6 50 rps)
+        uses: azure/load-testing@v1
+        with:
+          loadtestResource: ${{ secrets.AZURE_LOADTESTING_RESOURCE }}   # nome do recurso Load Testing
+          resourceGroup:     ${{ secrets.AZURE_RESOURCE_GROUP }}        # RG do recurso Load Testing
+          loadTestConfigFile: tests/loadtesting/k6-50rps.yaml           # config do teste
+          # Mapeia variáveis para o script k6
+          env: |
+            BASE_URL=${{ github.event.inputs.base_url }}
+            MERCHANT_ID=${{ github.event.inputs.merchant_id }}
+            DATE=${{ github.event.inputs.date }}
+
+      - name: Publicar artefatos de resultado
+        uses: actions/upload-artifact@v4
+        with:
+          name: loadtest-results
+          path: |
+            ./results/**/*
+            **/test-run.log
+          if-no-files-found: ignore

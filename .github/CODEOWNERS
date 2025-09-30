@@ -1,0 +1,25 @@
+# CODEOWNERS — define revisores automáticos por pasta
+# Substitua os placeholders pelos handles reais do GitHub (ex.: @org/arquitetura ou @joaosilva)
+
+# Donos padrão (caso nenhuma regra abaixo case)
+*                         @org/maintainers
+
+# Documentação de arquitetura (ArchiMate) e ADRs
+/docs/archimate/          @org/arquitetura @org/tech-leads
+/docs/adrs/               @org/arquitetura @org/tech-leads
+
+# Infraestrutura (IaC) e Workflows
+/infra/bicep/             @org/infra @org/devsecops
+/infra/terraform/         @org/infra @org/devsecops
+/.github/workflows/       @org/devops @org/devsecops
+
+# Aplicações (ajuste se os paths existirem no repo)
+/src/api/                 @org/app-backend @org/arquitetura
+/src/svc-cons/            @org/app-backend @org/arquitetura
+
+# Observabilidade
+/workbooks/               @org/sre @org/observabilidade
+
+# Segurança (regras sensíveis)
+/infra/**/keyvault*       @org/security @org/devsecops
+/docs/**/seguranca*       @org/security @org/arquitetura

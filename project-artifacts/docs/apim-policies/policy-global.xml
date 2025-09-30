@@ -1,0 +1,18 @@
+<policies>
+  <inbound>
+    <base />
+    <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized">
+      <openid-config url="https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration" />
+      <required-claims>
+        <claim name="aud"> <value>api://{clientId}</value> </claim>
+      </required-claims>
+    </validate-jwt>
+    <rate-limit calls="100" renewal-period="60" />
+    <set-header name="x-correlation-id" exists-action="override">
+      <value>@(context.Request.Headers.GetValueOrDefault("x-correlation-id", Guid.NewGuid().ToString()))</value>
+    </set-header>
+  </inbound>
+  <backend><base /></backend>
+  <outbound><base /></outbound>
+  <on-error><base /></on-error>
+</policies>

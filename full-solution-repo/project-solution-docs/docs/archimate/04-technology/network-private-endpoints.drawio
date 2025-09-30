@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net" modified="2025-09-30T10:15:06.285524" agent="Python" version="24.7.10">
+  <diagram id="diag1" name="Network - Private Endpoints">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="vnet" value="VNET\nprivada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="40" y="40" w="160" h="60" />
+<mxCell id="app" value="App Service\nVNET Integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="240" y="40" w="200" h="60" />
+<mxCell id="func" value="Functions\nVNET Integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="240" y="120" w="200" h="60" />
+<mxCell id="pe_cos" value="Private Endpoint\nCosmos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="480" y="40" w="170" h="60" />
+<mxCell id="pe_sb" value="Private Endpoint\nService Bus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="480" y="120" w="170" h="60" />
+<mxCell id="pe_redis" value="Private Endpoint\nRedis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="480" y="200" w="170" h="60" />
+<mxCell id="pe_blob" value="Private Endpoint\nBlob Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="480" y="280" w="170" h="60" />
+<mxCell id="dns" value="DNS Privado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="700" y="120" w="160" h="60" />
+<mxCell id="n1" source="vnet" target="app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n2" source="vnet" target="func" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n3" source="app" target="pe_cos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n4" source="func" target="pe_sb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n5" source="app" target="pe_redis" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n6" source="func" target="pe_blob" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n7" source="pe_cos" target="dns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n8" source="pe_sb" target="dns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n9" source="pe_redis" target="dns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="n10" source="pe_blob" target="dns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

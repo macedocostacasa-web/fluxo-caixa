@@ -1,0 +1,24 @@
+<mxfile host="app.diagrams.net" modified="2025-09-30T10:15:06.256446" agent="Python" version="24.7.10">
+  <diagram id="diag1" name="Business Services & Process">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="role1" value="Business Role\nOperador Caixa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="40" y="60" w="160" h="60" />
+<mxCell id="role2" value="Business Role\nGestor Loja" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="40" y="160" w="160" h="60" />
+<mxCell id="proc1" value="Business Process\nRegistrar Lançamento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="260" y="60" w="200" h="60" />
+<mxCell id="proc2" value="Business Process\nConsolidar Dia" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="260" y="160" w="200" h="60" />
+<mxCell id="svc1" value="Business Service\nServiço Lançamentos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="520" y="60" w="200" h="60" />
+<mxCell id="svc2" value="Business Service\nServiço Consolidado Diário" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="520" y="160" w="200" h="60" />
+<mxCell id="ctr1" value="Contract\nPolítica de Estorno" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="520" y="240" w="200" h="50" />
+<mxCell id="ctr2" value="Contract\nSLA Consulta Saldo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#1C1C1E;fontSize=12;" vertex="1" parent="1" x="520" y="300" w="200" h="50" />
+<mxCell id="b1" source="role1" target="proc1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="b2" source="proc1" target="svc1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="b3" source="role2" target="proc2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="b4" source="proc2" target="svc2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="b5" source="svc1" target="ctr1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+<mxCell id="b6" source="svc2" target="ctr2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
