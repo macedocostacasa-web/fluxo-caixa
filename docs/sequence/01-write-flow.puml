@@ -1,0 +1,31 @@
+@startuml
+title Fluxo de Escrita — POST /lancamentos (2025-09-30)
+
+actor Cliente
+participant "Front Door/WAF" as FD
+participant "API Management" as APIM
+participant "API Lançamentos\n(App Service)" as API
+participant "Service Bus\nTopic: lancamentos" as SB
+participant "Azure Functions\nConsolidador" as FUNC
+database "Cosmos DB\n(lancamentos)" as CDB_L
+database "Cosmos DB\n(saldosDiarios)" as CDB_S
+collections "Redis\n(saldo cache)" as REDIS
+collections "Key Vault\n(MI)" as KV
+participant "Azure Monitor\n(App Insights/Logs)" as MON
+
+Cliente -> FD: POST /lancamentos\nIdempotency-Key
+FD -> APIM: encaminha (WAF ok)
+APIM -> API: valida JWT + schema + rate-limit
+API -> KV: autentica com MI (segredos/conn)
+API -> CDB_L: upsert lançamento (idempotente)
+API -> SB: publica EventoLancamento
+API -> MON: log/correlação
+
+SB -> FUNC: entrega evento
+FUNC -> CDB_S: recalcula saldo do dia
+FUNC -> REDIS: invalida/atualiza cache (TTL)
+FUNC -> MON: métricas/trace
+
+API <-- APIM: 201 Created
+Cliente <-- FD: 201 + Idempotency-Key
+@enduml

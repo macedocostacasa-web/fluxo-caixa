@@ -1,0 +1,28 @@
+@startuml
+title Fluxo de Leitura — GET /consolidado (2025-09-30)
+
+actor Cliente
+participant APIM
+participant "API Lançamentos" as API
+collections "Redis\n(saldo cache)" as REDIS
+database "Cosmos DB\n(saldosDiarios)" as CDB_S
+participant MON
+
+Cliente -> APIM: GET /consolidado?merchantId&data
+APIM -> API: valida JWT+schema
+API -> REDIS: GET saldo:<merchantId>:<YYYY-MM-DD>
+alt Cache HIT
+  REDIS --> API: saldo (snapshot)
+  API -> MON: log p95 baixo
+  API --> APIM: 200 (X-Last-Recalc-At)
+  APIM --> Cliente: 200
+else Cache MISS
+  REDIS --> API: (nil)
+  API -> CDB_S: GET saldo diário
+  CDB_S --> API: documento saldo
+  API -> REDIS: SETEX (TTL curto)
+  API -> MON: log p95 leitura Cosmos
+  API --> APIM: 200 (X-Last-Recalc-At)
+  APIM --> Cliente: 200
+end
+@enduml

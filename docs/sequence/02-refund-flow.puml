@@ -1,0 +1,27 @@
+@startuml
+title Fluxo de Estorno — POST /lancamentos/{id}/estorno (2025-09-30)
+
+actor Cliente
+participant APIM
+participant "API Lançamentos" as API
+database "Cosmos DB\n(lancamentos)" as CDB_L
+participant "Service Bus\nTopic" as SB
+participant "Azure Functions\nConsolidador" as FUNC
+database "Cosmos DB\n(saldosDiarios)" as CDB_S
+collections "Redis" as REDIS
+participant MON
+
+Cliente -> APIM: POST /lancamentos/{id}/estorno
+APIM -> API: valida JWT+schema
+API -> CDB_L: cria novo lançamento compensatório\n(reversedBy = id original)
+API -> SB: publica EventoLancamento (tipo=ESTORNO)
+API -> MON: log
+
+SB -> FUNC: evento de estorno
+FUNC -> CDB_S: recalcula saldo do dia
+FUNC -> REDIS: invalida cache do dia
+FUNC -> MON: trace/metrics
+
+APIM <-- API: 201 Created (estorno)
+Cliente <-- APIM: 201
+@enduml
