@@ -22,7 +22,7 @@
 ## 📁 Estrutura do Repositório (resumo)
 ```
 docs/
-  archimate/…           # diagramas .drawio e notas (MD/YAML)
+  arch/…           # diagramas .drawio e notas (MD/YAML)
   adrs/…                # Architecture Decision Records
   api/
     openapi.yaml        # especificação da API (v1)
