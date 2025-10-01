@@ -131,5 +131,5 @@ MIT
 =======
 # Repositório — Solução Fluxo de Caixa
 
-Veja `docs/` para arquitetura (ArchiMate & ADRs) e `infra/` para Bicep/Terraform e workflows.
+Veja `docs/` para arquitetura (Arch & ADRs) e `infra/` para Bicep/Terraform e workflows.
 >>>>>>> 1b78649 (chore: bootstrap do projeto)
